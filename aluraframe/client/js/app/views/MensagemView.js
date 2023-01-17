@@ -1,14 +1,10 @@
-class MensagemView{
+class MensagemView extends View{
 
     constructor(elemento){
-        this._elemento = elemento;
+        super(elemento);
     }
 
     _template(model){
         return model.texto ? `<P class="alert alert-info">${model.texto}</P>` : '<p></p>';
-    }
-
-    update(model){
-        this._elemento.innerHTML = this._template(model);
     }
 }
