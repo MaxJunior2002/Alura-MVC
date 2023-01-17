@@ -15,6 +15,14 @@ class NegociacaoController{
         this._negociacoesView.update(this._listaNegociacoes);
     }
 
+    apaga(){
+        this._listaNegociacoes.esvazia();
+        this._negociacoesView.update(this._listaNegociacoes);
+        
+        this._mensagem.texto = 'Lista de negociações apagada';
+        this._mensagemView.update(this._mensagem);
+    }
+
     adiciona(event) {
         event.preventDefault();
         
