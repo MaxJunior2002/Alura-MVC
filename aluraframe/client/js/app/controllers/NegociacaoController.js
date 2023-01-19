@@ -23,6 +23,24 @@ class NegociacaoController{
         this._negociacoesView.update(this._listaNegociacoes);
     }
 
+
+    importaNegociacoes(){
+
+        let service = new NegociacaoService();
+
+        Promise.all([
+            service.obterNegociacoesDaSemana(),
+            service.obterNegociacoesDaSemanaAnterior(),
+            service.obterNegociacoesDaSemanaRetrasada()
+        ]).then(negociacoes => {
+            negociacoes
+            .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+            .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+            this._mensagem.texto = 'Negocições importadas com sucesso';
+        })
+        .catch(erro => this._mensagem.texto = erro);
+    }
+
     apaga(){
         this._listaNegociacoes.esvazia();
 
